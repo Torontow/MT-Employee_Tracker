@@ -18,7 +18,7 @@ const start = () => {
             .prompt({
                     name: 'manage',
                     type: 'list',
-                    message: 'Hello! What would you like to manage today?',
+                    message: 'Hello! What would you like to view/manage today?',
                     choices: [
                         'Departments',
                         'Employees',
@@ -29,6 +29,7 @@ const start = () => {
                 switch (answer.manage) {
                     case 'Departments':
                         console.log(answer.manage);
+                        manageDepts();
                         break;
                     case 'Employees':
                         console.log(answer.manage);
@@ -42,7 +43,32 @@ const start = () => {
             });
 };
 // Function which prompts user for what they would like to do with departments.
-
+const manageDepts = () => {
+    inquirer
+        .prompt({
+            name: 'manageDepts',
+            type: 'list',
+            message: 'What would you like to do?',
+            choices: [
+                'View all departments',
+                'Add a department',
+                'Delete a department',
+            ],
+        })
+        .then((answer) => {
+            switch (answer.manageDepts) {
+                case 'View all departments':
+                    console.log(answer.manageDepts);
+                    break;
+                case 'Add a department':
+                    console.log(answer.manageDepts);
+                    break;
+                case 'Delete a department':
+                    console.log(answer.manageDepts);
+                    break;
+            }
+        });
+}
 // Function which allows user to view all departments.
 
 // Function which allows user to add a department.
