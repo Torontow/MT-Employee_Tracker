@@ -213,6 +213,7 @@ const manageEmpRoles = () => {
             break;
           case 'Add an employee role':
             console.log(answer.manageEmpRoles);
+            addEmpRole();
             break;
           case 'Update the role of an employee':
             console.log(answer.manageEmpRoles);
@@ -225,6 +226,54 @@ const manageEmpRoles = () => {
 // Function which allows user to view all employee roles.
 
 // Function which allows user to add an employee roles.
+
+const addEmpRole = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'title',
+                type: 'input',
+                message: 'Enter employee position.',
+            },
+            {
+                name: 'roleSalary',
+                type: 'number',
+                message: 'Enter weekly salary in dollars and cents.',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                      return true;
+                    }
+                    return false;
+                  },
+            },
+            {
+                name: 'deptID',
+                type: 'number',
+                message: 'Enter department id number for this position.',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                      return true;
+                    }
+                    return false;
+                  },
+            },
+        ])
+        .then((answer) => {
+            connection.query(
+                'INSERT INTO role SET ?',
+                {
+                    title: answer.title,
+                    salary: answer.roleSalary,
+                    department_id: answer.deptID,
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log('Role added successfully!');
+                    start();
+                }
+            )
+        })
+}
 
 // connect to the mysql server and sql database
 connection.connect(err => {
