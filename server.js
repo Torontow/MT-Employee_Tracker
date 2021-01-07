@@ -112,19 +112,26 @@ const addDept = () => {
 
 // Function which allows user to delete a department.
 const deleteDept = () => {
-    inquirer
-      .prompt({
-        name: 'deleteID',
-        type: 'number',
-        message: 'Enter the ID of the department you would like to remove.'
-      })
-      .then(answer => {
-        connection.query('DELETE FROM department WHERE ?', {
+  inquirer
+    .prompt({
+      name: 'deleteID',
+      type: 'number',
+      message: 'Enter the ID of the department you would like to remove.'
+    })
+    .then(answer => {
+      connection.query(
+        'DELETE FROM department WHERE ?',
+        {
           id: answer.deleteID
-        })
-      })
-  }
-
+        },
+        err => {
+          if (err) throw err
+          console.log('Department deleted successfully!')
+          start()
+        }
+      )
+    })
+}
 
 // Function which prompts user for what they would like to do with employees.
 const manageEmps = () => {
@@ -295,7 +302,7 @@ const manageEmpRoles = () => {
           updateRole()
           break
         case 'Delete an employee role from list of roles':
-            deleteRole()
+          deleteRole()
       }
     })
 }
@@ -385,19 +392,18 @@ const updateRole = () => {
 }
 // Function which allows users to delete an employee role.
 const deleteRole = () => {
-    inquirer
-      .prompt({
-        name: 'deleteID',
-        type: 'number',
-        message: 'Enter the ID of the role you would like to remove.'
+  inquirer
+    .prompt({
+      name: 'deleteID',
+      type: 'number',
+      message: 'Enter the ID of the role you would like to remove.'
+    })
+    .then(answer => {
+      connection.query('DELETE FROM role WHERE ?', {
+        id: answer.deleteID
       })
-      .then(answer => {
-        connection.query('DELETE FROM role WHERE ?', {
-          id: answer.deleteID
-        })
-      })
-  }
-  
+    })
+}
 
 // connect to the mysql server and sql database
 connection.connect(err => {
