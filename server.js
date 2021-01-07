@@ -265,7 +265,8 @@ const manageEmpRoles = () => {
       choices: [
         'View all employee roles',
         'Add an employee role',
-        'Update the role of an employee'
+        'Update the role of an employee',
+        'Delete an employee role from list of roles'
       ]
     })
     .then(answer => {
@@ -282,6 +283,8 @@ const manageEmpRoles = () => {
           console.log(answer.manageEmpRoles)
           updateRole()
           break
+        case 'Delete an employee role from list of roles':
+            deleteRole()
       }
     })
 }
@@ -369,6 +372,21 @@ const updateRole = () => {
       ])
     })
 }
+
+const deleteRole = () => {
+    inquirer
+      .prompt({
+        name: 'deleteID',
+        type: 'number',
+        message: 'Enter the ID of the role you would like to remove.'
+      })
+      .then(answer => {
+        connection.query('DELETE FROM role WHERE ?', {
+          id: answer.deleteID
+        })
+      })
+  }
+  
 
 // connect to the mysql server and sql database
 connection.connect(err => {
