@@ -423,9 +423,17 @@ const deleteRole = () => {
       message: 'Enter the ID of the role you would like to remove.'
     })
     .then(answer => {
-      connection.query('DELETE FROM role WHERE ?', {
-        id: answer.deleteID
-      })
+      connection.query(
+        'DELETE FROM role WHERE ?',
+        {
+          id: answer.deleteID
+        },
+        err => {
+          if (err) throw err
+          console.log('Role deleted successfully!')
+          start()
+        }
+      )
     })
 }
 
