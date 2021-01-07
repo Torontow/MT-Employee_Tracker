@@ -65,6 +65,7 @@ const manageDepts = () => {
           break
         case 'Delete a department':
           console.log(answer.manageDepts)
+          deleteDept()
           break
       }
     })
@@ -114,6 +115,22 @@ const addDept = () => {
       )
     })
 }
+
+// Function which allows user to delete a department.
+const deleteDept = () => {
+    inquirer
+      .prompt({
+        name: 'deleteID',
+        type: 'number',
+        message: 'Enter the ID of the department you would like to remove.'
+      })
+      .then(answer => {
+        connection.query('DELETE FROM department WHERE ?', {
+          id: answer.deleteID
+        })
+      })
+  }
+
 
 // Function which prompts user for what they would like to do with employees.
 const manageEmps = () => {
