@@ -126,6 +126,7 @@ const manageEmps = () => {
             break;
           case 'Add an employee':
             console.log(answer.manageEmps);
+            addEmp();
             break;
           case 'Delete an employee':
             console.log(answer.manageEmps);
@@ -137,6 +138,59 @@ const manageEmps = () => {
 // Function which allows user to view all employees.
 
 // Function which allows user to add an employee.
+const addEmp = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'empFirstName',
+                type: 'input',
+                message: 'Enter first name.',
+            },
+            {
+                name: 'empLastName',
+                type: 'input',
+                message: 'Enter last name.',
+            },
+            {
+                name: 'roleID',
+                type: 'number',
+                message: 'Enter employee role id.',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                      return true;
+                    }
+                    return false;
+                  },
+            },
+            {
+                name: 'managerID',
+                type: 'number',
+                message: 'Enter employee manager id.',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                      return true;
+                    }
+                    return false;
+                  },
+            }
+        ])
+        .then((answer) => {
+            connection.query(
+                'INSERT INTO employee SET ?',
+                {
+                    first_name: answer.empFirstName,
+                    last_name: answer.empLastName,
+                    role_id: answer.roleID,
+                    manager_id: answer.managerID
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log('Employee added successfully!');
+                    start();
+                }
+            )
+        })
+}
 
 // Function which prompts user for what they would like to do with employee roles.
 
