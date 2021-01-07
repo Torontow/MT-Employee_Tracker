@@ -60,6 +60,7 @@ const manageDepts = () => {
           break
         case 'Add a department':
           console.log(answer.manageDepts)
+          addDept();
           break
         case 'Delete a department':
           console.log(answer.manageDepts)
@@ -70,7 +71,41 @@ const manageDepts = () => {
 // Function which allows user to view all departments.
 
 // Function which allows user to add a department.
-
+const addDept = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'deptId',
+                type: 'number',
+                message: 'Enter a department ID number.',
+                validate(value) {
+                    if (isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                },
+            },
+            {
+                name: 'deptName',
+                type: 'name',
+                message: 'Enter a department name.',
+            },
+        ])
+        .then((answer) => {
+            connection.query(
+                'INSERT INTO department SET ?',
+                {
+                    id: answer.deptId,
+                    dep_name: answer.deptName,
+                },
+                (err) => {
+                    if (err) throw err;
+                    console.log('Department added successfully!');
+                    start();
+                }
+            )
+        })
+}
 // Function which prompts user for what they would like to do with employees.
 const manageEmps = () => {
     inquirer
