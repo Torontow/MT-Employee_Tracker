@@ -277,7 +277,13 @@ const updateManager = () => {
         {
           id: answer.updateID
         }
-      ])
+      ],
+      err => {
+        if (err) throw err
+        console.log('Manager updated successfully!')
+        start()
+      }
+)
     })
 }
 
