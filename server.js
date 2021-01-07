@@ -122,7 +122,12 @@ const manageEmps = () => {
       name: 'manageEmps',
       type: 'list',
       message: 'What would you like to do?',
-      choices: ['View all employees', 'Add an employee', 'Delete an employee']
+      choices: [
+        'View all employees',
+        'Add an employee',
+        'Delete an employee',
+        'Update employee manager'
+      ]
     })
     .then(answer => {
       switch (answer.manageEmps) {
@@ -136,6 +141,9 @@ const manageEmps = () => {
           break
         case 'Delete an employee':
           console.log(answer.manageEmps)
+          break
+        case 'Update employee manager':
+          updateManager()
           break
       }
     })
@@ -201,6 +209,34 @@ const addEmp = () => {
           start()
         }
       )
+    })
+}
+
+// Function which allows user to update employee manager
+
+const updateManager = () => {
+  inquirer
+    .prompt([
+      {
+        name: 'updateID',
+        type: 'number',
+        message: 'Enter ID of employee whose manager you would like to change.'
+      },
+      {
+        name: 'newManagerID',
+        type: 'number',
+        message: 'Enter the new manager ID for selected employee.'
+      }
+    ])
+    .then(answer => {
+      connection.query('UPDATE employee SET ? WHERE ?', [
+        {
+          manager_id: answer.newManagerID
+        },
+        {
+          id: answer.updateID
+        }
+      ])
     })
 }
 
