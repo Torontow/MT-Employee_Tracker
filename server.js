@@ -372,7 +372,7 @@ const updateRole = () => {
       ])
     })
 }
-
+// Function which allows users to delete an employee role.
 const deleteRole = () => {
     inquirer
       .prompt({
