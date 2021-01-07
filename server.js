@@ -56,20 +56,27 @@ const manageDepts = () => {
     .then(answer => {
       switch (answer.manageDepts) {
         case 'View all departments':
-          console.log(answer.manageDepts)
-          break
+          console.log(answer.manageDepts);
+          viewDepts();
+          break;
         case 'Add a department':
-          console.log(answer.manageDepts)
+          console.log(answer.manageDepts);
           addDept();
-          break
+          break;
         case 'Delete a department':
-          console.log(answer.manageDepts)
-          break
+          console.log(answer.manageDepts);
+          break;
       }
     })
 };
 // Function which allows user to view all departments.
 
+const viewDepts = () => {
+    connection.query('SELECT * FROM department', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+}
 // Function which allows user to add a department.
 const addDept = () => {
     inquirer
