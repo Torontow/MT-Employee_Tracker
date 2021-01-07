@@ -1,4 +1,4 @@
-DELETE FROM department,
+DELETE FROM department;
 
 INSERT INTO department (id, name)
 VALUES (1, "Production"), 
@@ -7,7 +7,7 @@ VALUES (1, "Production"),
 (4, "Scenic Carpentry"), 
 (5, "Stage Crew");
 
-DELETE FROM role,
+DELETE FROM role;
 
 INSERT INTO role (title, salary, department_id)
 VALUES ("Production Manager", 1500.00, 1), 
@@ -24,7 +24,7 @@ VALUES ("Production Manager", 1500.00, 1),
 ("Head of Electrics", 900.00, 5),
 ("Head of Sound", 900.00, 5);
 
-DELETE FROM employee,
+DELETE FROM employee;
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Lyndee", "Hansen", 200, NULL),
