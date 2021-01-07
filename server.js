@@ -113,6 +113,8 @@ const addDept = () => {
             )
         })
 }
+
+
 // Function which prompts user for what they would like to do with employees.
 const manageEmps = () => {
     inquirer
@@ -225,6 +227,7 @@ const manageEmpRoles = () => {
         switch (answer.manageEmpRoles) {
           case 'View all employee roles':
             console.log(answer.manageEmpRoles);
+            viewRoles();
             break;
           case 'Add an employee role':
             console.log(answer.manageEmpRoles);
@@ -239,6 +242,13 @@ const manageEmpRoles = () => {
 
 
 // Function which allows user to view all employee roles.
+
+const viewRoles = () => {
+    connection.query('SELECT * FROM role', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+}
 
 // Function which allows user to add an employee roles.
 
