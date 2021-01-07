@@ -141,6 +141,7 @@ const manageEmps = () => {
           break
         case 'Delete an employee':
           console.log(answer.manageEmps)
+          deleteEmp()
           break
         case 'Update employee manager':
           updateManager()
@@ -212,8 +213,22 @@ const addEmp = () => {
     })
 }
 
-// Function which allows user to update employee manager
+// Function which allows user to delete employee.
+const deleteEmp = () => {
+  inquirer
+    .prompt({
+      name: 'deleteID',
+      type: 'number',
+      message: 'Enter the ID of the employee you would like to remove.'
+    })
+    .then(answer => {
+      connection.query('DELETE FROM employee WHERE ?', {
+        id: answer.deleteID
+      })
+    })
+}
 
+// Function which allows user to update employee manager
 const updateManager = () => {
   inquirer
     .prompt([
