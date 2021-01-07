@@ -270,20 +270,22 @@ const updateManager = () => {
       }
     ])
     .then(answer => {
-      connection.query('UPDATE employee SET ? WHERE ?', [
-        {
-          manager_id: answer.newManagerID
-        },
-        {
-          id: answer.updateID
+      connection.query(
+        'UPDATE employee SET ? WHERE ?',
+        [
+          {
+            manager_id: answer.newManagerID
+          },
+          {
+            id: answer.updateID
+          }
+        ],
+        err => {
+          if (err) throw err
+          console.log('Manager updated successfully!')
+          start()
         }
-      ],
-      err => {
-        if (err) throw err
-        console.log('Manager updated successfully!')
-        start()
-      }
-)
+      )
     })
 }
 
@@ -394,14 +396,22 @@ const updateRole = () => {
       }
     ])
     .then(answer => {
-      connection.query('UPDATE employee SET ? WHERE ?', [
-        {
-          role_id: answer.newRoleID
-        },
-        {
-          id: answer.updateID
+      connection.query(
+        'UPDATE employee SET ? WHERE ?',
+        [
+          {
+            role_id: answer.newRoleID
+          },
+          {
+            id: answer.updateID
+          }
+        ],
+        err => {
+          if (err) throw err
+          console.log('Role updated successfully!')
+          start()
         }
-      ])
+      )
     })
 }
 // Function which allows users to delete an employee role.
