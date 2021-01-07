@@ -33,6 +33,7 @@ const start = () => {
           break;
         case 'Employee Roles':
           console.log(answer.manage);
+          manageEmpRoles();
           break;
         default:
           console.log(`Invalid action: ${answer.action}`)
@@ -86,14 +87,14 @@ const manageEmps = () => {
       .then(answer => {
         switch (answer.manageEmps) {
           case 'View all employees':
-            console.log(answer.manageEmps)
-            break
+            console.log(answer.manageEmps);
+            break;
           case 'Add an employee':
-            console.log(answer.manageEmps)
-            break
+            console.log(answer.manageEmps);
+            break;
           case 'Delete an employee':
-            console.log(answer.manageEmps)
-            break
+            console.log(answer.manageEmps);
+            break;
         }
       })
   };
@@ -103,6 +104,34 @@ const manageEmps = () => {
 // Function which allows user to add an employee.
 
 // Function which prompts user for what they would like to do with employee roles.
+
+const manageEmpRoles = () => {
+    inquirer
+      .prompt({
+        name: 'manageEmpRoles',
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: [
+          'View all employee roles',
+          'Add an employee role',
+          'Update the role of an employee'
+        ]
+      })
+      .then(answer => {
+        switch (answer.manageEmpRoles) {
+          case 'View all employee roles':
+            console.log(answer.manageEmpRoles);
+            break;
+          case 'Add an employee role':
+            console.log(answer.manageEmpRoles);
+            break;
+          case 'Update the role of an employee':
+            console.log(answer.manageEmpRoles);
+            break;
+        }
+      })
+  };
+
 
 // Function which allows user to view all employee roles.
 
