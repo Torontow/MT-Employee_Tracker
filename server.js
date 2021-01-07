@@ -240,9 +240,17 @@ const deleteEmp = () => {
       message: 'Enter the ID of the employee you would like to remove.'
     })
     .then(answer => {
-      connection.query('DELETE FROM employee WHERE ?', {
-        id: answer.deleteID
-      })
+      connection.query(
+        'DELETE FROM employee WHERE ?',
+        {
+          id: answer.deleteID
+        },
+        err => {
+          if (err) throw err
+          console.log('Employee deleted successfully!')
+          start()
+        }
+      )
     })
 }
 
