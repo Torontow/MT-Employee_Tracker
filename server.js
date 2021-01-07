@@ -23,15 +23,12 @@ const start = () => {
     .then(answer => {
       switch (answer.manage) {
         case 'Departments':
-          console.log(answer.manage)
           manageDepts()
           break
         case 'Employees':
-          console.log(answer.manage)
           manageEmps()
           break
         case 'Employee Roles':
-          console.log(answer.manage)
           manageEmpRoles()
           break
         default:
@@ -56,15 +53,12 @@ const manageDepts = () => {
     .then(answer => {
       switch (answer.manageDepts) {
         case 'View all departments':
-          console.log(answer.manageDepts)
           viewDepts()
           break
         case 'Add a department':
-          console.log(answer.manageDepts)
           addDept()
           break
         case 'Delete a department':
-          console.log(answer.manageDepts)
           deleteDept()
           break
       }
@@ -105,7 +99,7 @@ const addDept = () => {
         'INSERT INTO department SET ?',
         {
           id: answer.deptId,
-          dep_name: answer.deptName
+          name: answer.deptName
         },
         err => {
           if (err) throw err
