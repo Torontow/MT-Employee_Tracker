@@ -130,6 +130,7 @@ const manageEmps = () => {
         switch (answer.manageEmps) {
           case 'View all employees':
             console.log(answer.manageEmps);
+            viewEmps();
             break;
           case 'Add an employee':
             console.log(answer.manageEmps);
@@ -143,6 +144,13 @@ const manageEmps = () => {
   };
   
 // Function which allows user to view all employees.
+
+const viewEmps = () => {
+    connection.query('SELECT * FROM employee', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+}
 
 // Function which allows user to add an employee.
 const addEmp = () => {
